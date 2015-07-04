@@ -1,0 +1,5 @@
+.DS_Store
+debug/
+release/
+mr.pro.user
+*.sublime-workspace
