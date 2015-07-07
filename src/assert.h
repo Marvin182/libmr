@@ -1,11 +1,12 @@
 #ifndef GLOBALS_ASSERT_H
 #define GLOBALS_ASSERT_H
 
+#include <functional>
+
 // Using Assert Library by Gregory Pakosz
 // https://github.com/gpakosz/Assert
 
 #define PPK_ASSERT_ENABLED 1
-
 #define PPK_ASSERT_DEFAULT_LEVEL Error
 
 #include "pempek_assert.h"
@@ -31,7 +32,17 @@
 // #define ASSERT_USED_FATAL 		PPK_ASSERT_USED_FATAL
 // #define ASSERT_USED_CUSTOM 		PPK_ASSERT_USED_CUSTOM
 
+using namespace pempek::assert::implementation;
+
+namespace mr {
+namespace assert {
+
+const char* levelToStr(int level);
 void initAssertHandler();
+void setCustomAssertHandler(AssertHandler handler);
+
+} // namespace assert
+} // namespace mr
 
 #endif // GLOBALS_ASSERT_H
 
