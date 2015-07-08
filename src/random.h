@@ -1,13 +1,16 @@
+#ifndef MR_RANDOM_H
+#define MR_RANDOM_H
+
 #include <random>
 
 namespace mr {
 namespace random {
 
-// #define STATIC_SEED 1729; // useful for testing
+unsigned int getSeed();
+uint64_t getSeed64();
 
-uint64_t getSeed();
-
-std::mt19937_64& getGenerator();
+std::mt19937& getGenerator();
+std::mt19937_64& getGenerator64();
 
 int integer(int lowerBound, int upperBound);
 
@@ -15,3 +18,5 @@ double probability();
 
 } // namespace random
 } // namespace mr
+
+#endif // MR_RANDOM_H
