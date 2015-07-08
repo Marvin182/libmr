@@ -1,5 +1,5 @@
-#ifndef GLOBALS_STRING_UTIL_H
-#define GLOBALS_STRING_UTIL_H
+#ifndef MR_STRING_UTIL_H
+#define MR_STRING_UTIL_H
 
 #include <QString>
 
@@ -15,4 +15,4 @@ QString currency(int amount, cqstring symbol = "€");
 
 bool fuzzyMatch(cqstring text, cqstring needle);
 
-#endif // GLOBALS_STRING_UTIL_H
+#endif // MR_STRING_UTIL_H

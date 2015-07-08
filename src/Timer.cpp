@@ -1,5 +1,5 @@
 #include "Timer.h"
-#include "../util/assert.h"
+#include "assert.h"
 
 namespace util {
 

@@ -1,3 +1,6 @@
+#ifndef MR_FILE_UTIL_H
+#define MR_FILE_UTIL_H
+
 #include "string-util.h"
 #include "assert.h"
 #include <QFile>
@@ -66,3 +69,5 @@ inline void parseCsvFile(cqstring filename, cqstring delimiter, cqstring textQua
 
 } // namespace io
 } // namespace mr
+
+#endif // MR_FILE_UTIL_H

@@ -1,5 +1,5 @@
-#ifndef GLOBALS_VERSION_H
-#define GLOBALS_VERSION_H
+#ifndef MR_VERSION_H
+#define MR_VERSION_H
 
 #include <QString>
 #include "string-util.h"
@@ -27,4 +27,4 @@ private:
 
 } // namespace mr
 
-#endif // GLOBALS_VERSION_H
+#endif // MR_VERSION_H

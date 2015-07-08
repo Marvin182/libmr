@@ -1,3 +1,6 @@
+#ifndef MR_CODEJAM_H
+#define MR_CODEJAM_H
+
 #include <iostream>
 #include "assert.h"
 
@@ -17,3 +20,4 @@ void forEachTestCase(F solve) {
 } // namespace codejam
 } // namespace mr
 
+#endif // MR_CODEJAM_H

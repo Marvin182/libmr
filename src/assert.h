@@ -1,5 +1,5 @@
-#ifndef GLOBALS_ASSERT_H
-#define GLOBALS_ASSERT_H
+#ifndef MR_ASSERT_H
+#define MR_ASSERT_H
 
 #include <functional>
 
@@ -44,5 +44,4 @@ void setCustomAssertHandler(AssertHandler handler);
 } // namespace assert
 } // namespace mr
 
-#endif // GLOBALS_ASSERT_H
-
+#endif // MR_ASSERT_H

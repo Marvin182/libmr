@@ -1,5 +1,5 @@
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef MR_COMMON_H
+#define MR_COMMON_H
 
 #include "../../src/assert.h"
 #include "../../src/codejam.h"
@@ -8,6 +8,5 @@
 #include "../../src/random.h"
 #include "../../src/string-util.h"
 #include "../../src/vector.h"
-#include "../../src/version.h"
 
-#endif // COMMON_H
+#endif // MR_COMMON_H

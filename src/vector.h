@@ -1,3 +1,6 @@
+#ifndef MR_VECTOR_H
+#define MR_VECTOR_H
+
 #include <iostream>
 #include <vector>
 
@@ -11,3 +14,5 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec) {
 	}
 	return os << "]";
 }
+
+#endif // MR_VECTOR_H

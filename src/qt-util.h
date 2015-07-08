@@ -1,8 +1,8 @@
-#ifndef QT_UTIL_H
-#define QT_UTIL_H
+#ifndef MR_QT_UTIL_H
+#define MR_QT_UTIL_H
 
 #include <QString>
 
 QString appLocalDataLocation();
 
-#endif // QT_UTIL_H
+#endif // MR_QT_UTIL_H
