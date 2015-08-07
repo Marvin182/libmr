@@ -11,7 +11,9 @@ include(gitversion.pri)
 DEFINES += LIB_VERSION=\\\"$$GIT_VERSION\\\"
 
 HEADERS += \
-    include/mr/common.h \
+    include/mr/common \
+    include/mr/timer \
+    include/mr/version \
     src/qt-util.h \
     src/assert.h \
     src/pempek_assert.h \
@@ -27,7 +29,7 @@ SOURCES += \
     src/assert.cpp \
     src/random.cpp \
     src/pempek_assert.cpp \
-    src/string-util.cpp
+    src/string-util.cpp \
     src/Timer.cpp \
     src/Version.cpp
 

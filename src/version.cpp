@@ -1,16 +1,13 @@
 #include "version.h"
 
-#include "assert.h"
 #include <iostream>
 #include <QRegExp>
 #include <QStringList>
 
 namespace mr {
 
-const Version& Version::get(cqstring gitVersion) {
-	static Version* v = new Version(gitVersion);
-	assert_fatal(v != nullptr);
-	return *v;
+const Version* Version::get(cqstring gitVersion) {
+	return new Version(gitVersion);
 }
 
 const Version& Version::lib() {
@@ -32,10 +29,9 @@ Version::Version(cqstring gitVersion) {
 	minor = rx.cap(2).toInt(&ok);
 	assert_error(ok, "could not parse minor version");	
 	revision = rx.cap(3).toInt(&ok);
-	if (!ok) {
-		revision = rx.cap(5).toInt(&ok);
-		assert_error(ok, "could not revision number");
-	}
+	if (!ok) revision = 0;
+	build = rx.cap(5).toInt(&ok);
+	assert_error(ok, "could not parse build number");
 
 	status = rx.cap(4);
 	commitId = rx.cap(6);
@@ -43,36 +39,39 @@ Version::Version(cqstring gitVersion) {
 	assert_error(major >= 0);
 	assert_error(minor >= 0);
 	assert_error(revision >= 0);
+	assert_error(build >= 0);
 }
 
 int Version::asNumber() const {
-	int x = revision + (1000 * (minor + 100 * major));
-	x *= 10;
-	assert_error(x >= 10);
-	if (status == "rc3") {
-		x -= 1;
-	} else if (status == "rc2") {
-		x -= 2;
-	} else if (status == "rc1") {
-		x -= 3;
-	} else if (status == "beta") {
-		x -= 6;
-	} else if (status == "alpha") {
-		x -= 9;
+	int x = ((major * 100 + minor) * 100 + revision) * 100;
+	assert_error(x >= 100);
+	if (status.startsWith("rc")) {
+		x -= 10;
+	} else if (status.startsWith("beta")) {
+		x -= 50;
+	} else if (status.startsWith("alpha")) {
+		x -= 99;
 	}
+	x += build;
 	return x;
 }
 
 bool Version::isStable() const {
-	return status.isEmpty();
+	return status.isEmpty() || status == "final";
 }
 
 QString Version::shortStr() const {
-	return QString("%1.%2.%3").arg(major).arg(minor).arg(revision);
+	if (isStable()) {
+		return QString("%1.%2%3").arg(major).arg(minor).arg(rev());
+	}
+	return QString("%1.%2%3-%4").arg(major).arg(minor).arg(rev()).arg(status);
 }
 
 QString Version::longStr() const {
-	return QString("%1.%2.%3%4 (commit id: %5)").arg(major).arg(minor).arg(revision).arg(status.isEmpty() ? "" : " " + status).arg(commitId);
+	if (build > 0) {
+		return shortStr() + QString(" (commit id: %1, build: %2)").arg(commitId).arg(build);
+	}
+	return shortStr() + QString(" (commit id: %1)").arg(commitId);
 }
 
 } // namespace mr
