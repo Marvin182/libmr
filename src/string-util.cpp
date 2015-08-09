@@ -18,6 +18,32 @@ QString qstr(const std::string& s) {
 	return QString::fromStdString(s);
 }
 
+namespace mr {
+namespace string {
+
+QString trim(QString& s, cqstring prefix, cqstring suffix) {
+	int a = s.startsWith(prefix) ? prefix.length() : 0;
+	int b = s.length() - a - (s.endsWith(suffix) ? suffix.length() : 0);
+	return QStringRef(&s, a, b).toString();
+}
+
+void trim(QStringList& list, cqstring prefix, cqstring suffix) {
+	for (auto& s : list) {
+		if (!s.isEmpty()) {
+			s = trim(s, prefix, suffix);
+		}
+	}
+}
+
+QStringList splitAndTrim(cqstring line, cqstring delimiter, cqstring textQualifier) {
+	auto list = line.split(delimiter);
+	trim(list, textQualifier, textQualifier);
+	return list;
+}
+
+} // namespace string
+} // namespace mr
+
 QString currency(int amount, cqstring symbol) {
 	return QLocale().toCurrencyString(amount / 100.0, symbol);
 }

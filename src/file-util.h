@@ -30,7 +30,7 @@ inline bool readTextFile(cqstring filename, F func) {
 	assert_debug(!file.atEnd(), "statement file '%s' is empty", cstr(filename));
 
 	auto data = file.readAll();
-        assert_error(file.atEnd(), "not all data read from file %s'", cstr(filename));
+	assert_error(file.atEnd(), "not all data read from file %s'", cstr(filename));
 
 	QTextStream in(data);
 	in.setCodec(QTextCodec::codecForUtfText(data));
@@ -44,27 +44,18 @@ inline bool readTextFile(cqstring filename, F func) {
 
 template <typename F>
 inline void parseCsvFile(cqstring filename, cqstring delimiter, cqstring textQualifier, bool skipFirstLine, F lineFunc) {
-        readTextFile(filename, [&](QTextStream& in) {
-                auto separator = textQualifier + delimiter + textQualifier;
-                if (skipFirstLine && !in.atEnd()) {
-                        in.readLine();
-                }
-                int lineNumber = skipFirstLine ? 1 : 0;
-                while (!in.atEnd()) {
-                        lineNumber++;
-                        auto line = QString(in.readLine()).trimmed();
-
-                        if (!textQualifier.isEmpty()) {
-                                assert_debug(line.length() >= 2 * textQualifier.length());
-                                assert_debug(line.startsWith(textQualifier));
-                                assert_debug(line.endsWith(textQualifier), "line: '%s', textQualifier: '%s'", cstr(line), cstr(textQualifier));
-                                line = QStringRef(&line, textQualifier.length(), line.length() - textQualifier.length()).toString();
-                        }
-
-                        auto fields = line.split(separator);
-                        lineFunc(lineNumber, fields);
-                }
-        });
+	readTextFile(filename, [&](QTextStream& in) {
+		if (skipFirstLine && !in.atEnd()) {
+			in.readLine();
+		}
+		int lineNumber = skipFirstLine ? 1 : 0;
+		while (!in.atEnd()) {
+			lineNumber++;
+			auto line = QString(in.readLine()).trimmed();
+			auto fields = mr::string::splitAndTrim(line, delimiter, textQualifier);
+			lineFunc(lineNumber, fields);
+		}
+	});
 }
 
 } // namespace io

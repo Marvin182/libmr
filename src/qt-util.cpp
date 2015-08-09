@@ -7,6 +7,9 @@
 
 #include <iostream>
 
+namespace mr {
+namespace qt {
+
 QString appLocalDataLocation() {
 	auto path = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
 	assert_fatal(!path.isEmpty(), "empty path for app data location directory");
@@ -23,3 +26,6 @@ QString appLocalDataLocation() {
 
 	return dir.absolutePath();
 }
+
+} // namespace qt
+} // namespace mr

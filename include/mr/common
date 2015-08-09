@@ -4,6 +4,7 @@
 #include "../../src/assert.h"
 #include "../../src/codejam.h"
 #include "../../src/file-util.h"
+#include "../../src/log.h"
 #include "../../src/qt-util.h"
 #include "../../src/random.h"
 #include "../../src/string-util.h"

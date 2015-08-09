@@ -14,21 +14,24 @@ HEADERS += \
     include/mr/common \
     include/mr/timer \
     include/mr/version \
-    src/qt-util.h \
     src/assert.h \
-    src/pempek_assert.h \
-    src/string-util.h \
     src/codejam.h \
+    src/file-util.h \
+    src/log.h \
+    src/pempek_assert.h \
+    src/qt-util.h \
     src/random.h \
-    src/vector.h \
+    src/string-util.h \
     src/Timer.h \
+    src/vector.h \
     src/Version.h
 
 SOURCES += \
-    src/qt-util.cpp \
     src/assert.cpp \
-    src/random.cpp \
+    src/log.cpp \
     src/pempek_assert.cpp \
+    src/qt-util.cpp \
+    src/random.cpp \
     src/string-util.cpp \
     src/Timer.cpp \
     src/Version.cpp
