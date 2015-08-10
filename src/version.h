@@ -19,7 +19,6 @@ struct Version {
 	static const Version& lib();
 	static const Version* get(cqstring gitVersion);
 
-	int asNumber() const;
 	bool isStable() const;
 	QString shortStr() const;
 	QString longStr() const;

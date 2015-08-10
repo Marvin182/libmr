@@ -1,7 +1,6 @@
 #include "string-util.h"
 #include "assert.h"
 #include <QLocale>
-#include <iostream>
 
 std::ostream& operator<<(std::ostream& os, cqstring s) {
 	return (os << s.toStdString());
