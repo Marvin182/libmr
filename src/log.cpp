@@ -34,9 +34,11 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext&, const QStri
 	// print to standard output
 	auto m = QString("%1: %2\n").arg(messageTypeToStr(type)).arg(msg);
 	if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg) {
-		std::cerr << m << std::endl;
+		std::cerr << m;
+		std::flush(std::cerr);
 	} else {
-		std::cout << m << std::endl;
+		std::cout << m;
+		std::flush(std::cout);
 	}
 
 	// write message into log file

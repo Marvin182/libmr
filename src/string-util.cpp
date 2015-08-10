@@ -1,6 +1,7 @@
 #include "string-util.h"
 #include "assert.h"
 #include <QLocale>
+#include <iostream>
 
 std::ostream& operator<<(std::ostream& os, cqstring s) {
 	return (os << s.toStdString());
@@ -39,6 +40,21 @@ QStringList splitAndTrim(cqstring line, cqstring delimiter, cqstring textQualifi
 	auto list = line.split(delimiter);
 	trim(list, textQualifier, textQualifier);
 	return list;
+}
+
+QString separateGroups(cqstring s, int groupSize, QChar separator) {
+	assert_error(groupSize > 0, "groupSize: %d", groupSize);
+	int groupCount = (s.length() - 1) / groupSize + 1;
+	int len = s.length() + groupCount - 1;
+	QString grouped(len, separator);
+
+	int j = 0;
+	for (int i = 0; i < s.length(); i++) {
+		grouped[j++] = s[i];
+		if ((j + 1) % (groupSize + 1) == 0) j++;
+	}
+
+	return grouped;
 }
 
 } // namespace string

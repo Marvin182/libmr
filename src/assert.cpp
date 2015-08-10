@@ -3,7 +3,6 @@
 
 #include <QtDebug>
 #include <QFile>
-#include <QDateTime>
 #include <QApplicationStateChangeEvent>
 
 using namespace pempek::assert::implementation;
@@ -47,12 +46,11 @@ AssertAction::AssertAction onAssert(const char* file,
 									const char* message) {
 	// log assertion fail
 	QDebug out(levelToQtMsgType(level));
-	QString msg = message == nullptr ? "" : QString("message: %1").arg(message);
-	auto dt = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-	out.nospace() << dt << "\tAssertion failed\n"
-				<< QString("\t\texpression: %1\n").arg(expression)
-				<< QString("\t\t%1(level %2 = %3)\n").arg(msg).arg(levelToStr(level)).arg(level)
-				<< QString("\tfunction %1 in file: %2 line %3\n").arg(function).arg(file).arg(line);
+	QString msg = message == nullptr ? "" : QString("\n\t\tmessage: %1").arg(message);
+	out.noquote().nospace() << QString("Assertion failed (level %2, %3)").arg(level).arg(levelToStr(level))
+				<< "\n\t\t" << QString("expression: %1").arg(expression)
+				<< msg
+				<< "\n\t\t" << QString("function %1 in file: %2 line %3").arg(function).arg(file).arg(line);
 
 	// call additional handlers
 	for (auto handler : additionalAssertHandlers) {

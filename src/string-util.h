@@ -6,6 +6,8 @@
 #define cqstring const QString&
 // using cqstring = const QString&;
 
+// qPrintable(str) = str.toLocal8Bit().constData()
+// cstr(str) = str.toUtf8().constData()
 const char* cstr(cqstring s);
 std::string str(cqstring s);
 QString qstr(const std::string& s);
@@ -18,6 +20,7 @@ namespace string {
 QString trim(QString& s, cqstring prefix, cqstring suffix);
 void trim(QStringList& list, cqstring prefix, cqstring suffix);
 QStringList splitAndTrim(cqstring line, cqstring delimiter, cqstring textQualifier);
+QString separateGroups(cqstring s, int groupSize, QChar separator = ' ');
 
 } // namespace string
 } // namespace mr

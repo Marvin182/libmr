@@ -3,6 +3,8 @@
 
 #include <QtDebug>
 
+#define qLog() qInfo().noquote().nospace()
+
 namespace mr {
 namespace log {
 
