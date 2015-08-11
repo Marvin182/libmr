@@ -19,26 +19,49 @@ QString qstr(const std::string& s) {
 }
 
 namespace mr {
-namespace string {
 
-QString trim(QString& s, cqstring prefix, cqstring suffix) {
-	int a = s.startsWith(prefix) ? prefix.length() : 0;
-	int b = s.length() - a - (s.endsWith(suffix) ? suffix.length() : 0);
-	return QStringRef(&s, a, b).toString();
+QStringList split(cqstring s, QChar sep, QChar tq, QString::SplitBehavior behavior) {
+	return split(s, sep, tq.isNull() ? QString("") : tq, behavior);
 }
 
-void trim(QStringList& list, cqstring prefix, cqstring suffix) {
-	for (auto& s : list) {
-		if (!s.isEmpty()) {
-			s = trim(s, prefix, suffix);
+QStringList split(cqstring s, cqstring sep, cqstring tq, QString::SplitBehavior behavior) {
+	QStringList parts;
+
+	int len = s.length();
+	int tqLen = tq.length();
+	int i = 0;
+
+	while (i < len) {
+		int start, end;
+		if (QStringRef(&s, i, len - i).startsWith(tq)) {
+			// part with text qualifier
+			start = i + tqLen;
+			end = s.indexOf(tq, start);
+			i = end + tqLen; // point i to the beginning of the separator
+		} else {
+			// part without text qualifier
+			start = i;
+			end = s.indexOf(sep, i);
+			if (end == -1) end = len;
+			i = end; // point i to the beginning of the separator
 		}
-	}
-}
 
-QStringList splitAndTrim(cqstring line, cqstring delimiter, cqstring textQualifier) {
-	auto list = line.split(delimiter);
-	trim(list, textQualifier, textQualifier);
-	return list;
+		// add part
+		if (end - start > 0 || behavior == QString::KeepEmptyParts) {
+			// add part, even it is empty
+			parts << QStringRef(&s, start, end - start).toString();
+		} // else part is empty and behavior was set to QString::SkipEmptyParts
+		
+		// if we are not at the end of the string, there must be a separator
+		if (i < len && !QStringRef(&s, i, len - i).startsWith(sep)) {
+			// incorrect formatted input string
+			throw std::invalid_argument(QString("Missing separator at position %1 of '%2', last part2: '%3'").arg(i).arg(s).arg(QStringRef(&s, start, end - start).toString()).toStdString());
+		}
+		// skip the separator
+		i += sep.length();
+	}
+
+	return parts;
 }
 
 QString separateGroups(cqstring s, int groupSize, QChar separator) {
@@ -56,7 +79,6 @@ QString separateGroups(cqstring s, int groupSize, QChar separator) {
 	return grouped;
 }
 
-} // namespace string
 } // namespace mr
 
 QString currency(int amount, cqstring symbol) {

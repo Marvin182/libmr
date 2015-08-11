@@ -20,9 +20,7 @@ const char* filenames[] = {
 const char* messageTypeToStr(QtMsgType type) {
 	switch (type) {
 		case QtDebugMsg: return "Debug";
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
 		case QtInfoMsg: return "Info"; // QtInfoMsg was added in Qt 5.5
-#endif
 		case QtWarningMsg: return "Warning";
 		case QtCriticalMsg: return "Critical";
 		case QtFatalMsg: return "Fatal";

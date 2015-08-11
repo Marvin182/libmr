@@ -52,7 +52,7 @@ inline void parseCsvFile(cqstring filename, cqstring delimiter, cqstring textQua
 		while (!in.atEnd()) {
 			lineNumber++;
 			auto line = QString(in.readLine()).trimmed();
-			auto fields = mr::string::splitAndTrim(line, delimiter, textQualifier);
+			auto fields = mr::split(line, delimiter, textQualifier);
 			lineFunc(lineNumber, fields);
 		}
 	});
