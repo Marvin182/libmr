@@ -15,16 +15,16 @@ struct Version {
 	QString status;
 	QString commitId;
 
+	Version(cqstring gitVersion);
+
 	static const Version& app();
 	static const Version& lib();
-	static const Version* get(cqstring gitVersion);
 
 	bool isStable() const;
 	QString shortStr() const;
 	QString longStr() const;
 
 private:
-	Version(cqstring gitVersion);
 
 	QString rev() const { return revision > 0 ? QString(".%1").arg(revision) : ""; }
 };

@@ -33,11 +33,17 @@ QStringList split(cqstring s, cqstring sep, cqstring tq, QString::SplitBehavior 
 
 	while (i < len) {
 		int start, end;
-		if (QStringRef(&s, i, len - i).startsWith(tq)) {
+		if (tqLen > 0 && QStringRef(&s, i, len - i).startsWith(tq)) {
 			// part with text qualifier
 			start = i + tqLen;
 			end = s.indexOf(tq, start);
-			i = end + tqLen; // point i to the beginning of the separator
+			if (end == -1) {
+				// no closing text qualifier found, point i to the end of the string
+				i = len - 1;
+			} else {
+				// point i to the beginning of the separator (there should be one after the closing text qualifier)
+				i = end == -1 ? len - 1 : end + tqLen;
+			}
 		} else {
 			// part without text qualifier
 			start = i;
@@ -55,7 +61,7 @@ QStringList split(cqstring s, cqstring sep, cqstring tq, QString::SplitBehavior 
 		// if we are not at the end of the string, there must be a separator
 		if (i < len && !QStringRef(&s, i, len - i).startsWith(sep)) {
 			// incorrect formatted input string
-			throw std::invalid_argument(QString("Missing separator at position %1 of '%2', last part2: '%3'").arg(i).arg(s).arg(QStringRef(&s, start, end - start).toString()).toStdString());
+			throw std::invalid_argument(QString("Missing separator at position %1 of '%2', last part2: '%3', i: %4, len: %5").arg(i).arg(s).arg(QStringRef(&s, start, end - start).toString()).arg(i).arg(len).toStdString());
 		}
 		// skip the separator
 		i += sep.length();

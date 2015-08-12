@@ -6,10 +6,6 @@
 
 namespace mr {
 
-const Version* Version::get(cqstring gitVersion) {
-	return new Version(gitVersion);
-}
-
 const Version& Version::lib() {
 	static Version* v = new Version(LIB_VERSION);
 	assert_fatal(v != nullptr);
