@@ -1,6 +1,7 @@
 #include "string-util.h"
 #include "assert.h"
 #include <QLocale>
+#include <iostream>
 
 std::ostream& operator<<(std::ostream& os, cqstring s) {
 	return (os << s.toStdString());
@@ -31,7 +32,7 @@ QStringList split(cqstring s, cqstring sep, cqstring tq, QString::SplitBehavior 
 	int tqLen = tq.length();
 	int i = 0;
 
-	while (i < len) {
+	while (i <= len) {
 		int start, end;
 		if (tqLen > 0 && QStringRef(&s, i, len - i).startsWith(tq)) {
 			// part with text qualifier
