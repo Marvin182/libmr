@@ -1,13 +1,16 @@
 #ifndef MR_COMMON_H
 #define MR_COMMON_H
 
-#include "../../src/assert.h"
 #include "../../src/codejam.h"
-#include "../../src/file-util.h"
-#include "../../src/log.h"
-#include "../../src/qt-util.h"
+#include "../../src/constants.h"
 #include "../../src/random.h"
-#include "../../src/string-util.h"
 #include "../../src/vector.h"
+
+#include "../../src/assert.h"
+#include "../../src/log.h"
+
+#include "../../src/qt-app.h"
+#include "../../src/qt-file.h"
+#include "../../src/qt-string.h"
 
 #endif // MR_COMMON_H

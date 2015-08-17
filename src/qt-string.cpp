@@ -1,4 +1,4 @@
-#include "string-util.h"
+#include "qt-string.h"
 #include "assert.h"
 #include <QLocale>
 #include <iostream>

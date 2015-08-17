@@ -3,7 +3,7 @@
 
 #include <QString>
 #include "assert.h"
-#include "string-util.h"
+#include "qt-string.h"
 
 namespace mr {
 

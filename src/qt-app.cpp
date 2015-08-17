@@ -1,7 +1,7 @@
-#include "qt-util.h"
+#include "qt-app.h"
 
 #include "assert.h"
-#include "string-util.h"
+#include "qt-string.h"
 #include <QDir>
 #include <QStandardPaths>
 

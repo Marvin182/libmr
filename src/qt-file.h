@@ -1,12 +1,12 @@
-#ifndef MR_FILE_UTIL_H
-#define MR_FILE_UTIL_H
+#ifndef MR_QT_FILE_H
+#define MR_QT_FILE_H
 
-#include "string-util.h"
-#include "assert.h"
 #include <QFile>
 #include <QStringList>
 #include <QTextStream>
 #include <QTextCodec>
+#include "assert.h"
+#include "qt-string.h"
 
 namespace mr {
 namespace io {
@@ -61,4 +61,4 @@ inline void parseCsvFile(cqstring filename, cqstring delimiter, cqstring textQua
 } // namespace io
 } // namespace mr
 
-#endif // MR_FILE_UTIL_H
+#endif // MR_QT_FILE_H

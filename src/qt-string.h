@@ -1,5 +1,5 @@
-#ifndef MR_STRING_UTIL_H
-#define MR_STRING_UTIL_H
+#ifndef MR_QT_STRING_H
+#define MR_QT_STRING_H
 
 #include <QString>
 
@@ -26,4 +26,4 @@ QString currency(int amount, cqstring symbol = "€");
 
 bool fuzzyMatch(cqstring text, cqstring needle);
 
-#endif // MR_STRING_UTIL_H
+#endif // MR_QT_STRING_H

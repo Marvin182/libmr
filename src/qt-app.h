@@ -1,11 +1,11 @@
-#ifndef MR_QT_UTIL_H
-#define MR_QT_UTIL_H
+#ifndef MR_QT_APP_H
+#define MR_QT_APP_H
 
 #include <QString>
 #include <QStringList>
 #include <QMap>
 #include "assert.h"
-#include "string-util.h"
+#include "qt-string.h"
 
 namespace mr {
 namespace qt {
@@ -65,4 +65,4 @@ inline QMap<QString, int>& deserialize<QString, int>(cqstring s, QMap<QString, i
 } // namespace qt
 } // namespace mr
 
-#endif // MR_QT_UTIL_H
+#endif // MR_QT_APP_H
