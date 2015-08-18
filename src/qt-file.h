@@ -12,34 +12,33 @@ namespace mr {
 namespace io {
 
 template <typename F>
-bool readTextFile(cqstring filename, F func);
+void readTextFile(cqstring filename, F func);
 
 template <typename F>
 void parseCsvFile(cqstring filename, cqstring delimiter, cqstring textQualifier, bool skipFirstLine, F lineFunc);
 
 template <typename F>
-inline bool readTextFile(cqstring filename, F func) {
+inline void readTextFile(cqstring filename, F func) {
 	QFile file(filename);
 
 	// verify that the file is opened correctly
-	assert_error(file.exists(), "file '%s' does not exists", cstr(filename));
-	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		assert_error(false, "Could not open file '%s'", cstr(filename));
-		return false;
+	if (!file.exists()) {
+		throw std::invalid_argument(QString("File '%1' does not exist.").arg(filename).toStdString());
 	}
-	assert_debug(!file.atEnd(), "statement file '%s' is empty", cstr(filename));
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+		throw std::runtime_error(QString("Could not open file '%1'").arg(filename).toStdString());
+	}
+	assert_warning(!file.atEnd(), "file '%s' is empty", cstr(filename));
 
 	auto data = file.readAll();
-	assert_error(file.atEnd(), "not all data read from file %s'", cstr(filename));
+	assert_error(file.atEnd(), "not all data read from file '%s'", cstr(filename));
 
 	QTextStream in(data);
 	in.setCodec(QTextCodec::codecForUtfText(data));
 
 	func(in);
 
-	assert_warning(in.atEnd(), "did not parse whole file '%s'", cstr(filename));
-
-	return true;
+	assert_warning(in.atEnd(), "did not read whole file '%s'", cstr(filename));
 }
 
 template <typename F>

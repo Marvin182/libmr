@@ -7,18 +7,6 @@ std::ostream& operator<<(std::ostream& os, cqstring s) {
 	return (os << s.toStdString());
 }
 
-const char* cstr(cqstring s) {
-	return s.toUtf8().constData();
-}
-
-std::string str(cqstring s) {
-	return s.toStdString();
-}
-
-QString qstr(const std::string& s) {
-	return QString::fromStdString(s);
-}
-
 namespace mr {
 
 QStringList split(cqstring s, QChar sep, QChar tq, QString::SplitBehavior behavior) {
