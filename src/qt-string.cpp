@@ -76,10 +76,6 @@ QString separateGroups(cqstring s, int groupSize, QChar separator) {
 
 } // namespace mr
 
-QString currency(int amount, cqstring symbol) {
-	return QLocale().toCurrencyString(amount / 100.0, symbol);
-}
-
 bool fuzzyMatch(cqstring text, cqstring needle) {
 	int j = 0;
 	for (const auto& chr : needle) {
