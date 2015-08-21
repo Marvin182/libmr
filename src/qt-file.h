@@ -51,6 +51,7 @@ inline void parseCsvFile(cqstring filename, cqstring delimiter, cqstring textQua
 		while (!in.atEnd()) {
 			lineNumber++;
 			auto line = QString(in.readLine()).trimmed();
+			if (line.isEmpty()) continue;
 			auto fields = mr::split(line, delimiter, textQualifier);
 			lineFunc(lineNumber, fields);
 		}

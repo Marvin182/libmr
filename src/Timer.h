@@ -3,7 +3,7 @@
 
 #include <chrono>
 
-namespace util {
+namespace mr {
 
 enum class TimerState {
 	not_started,
@@ -65,6 +65,6 @@ uint64_t Timer::timeNs(F func) {
 	return t.elapsedNanoseconds();
 }
 
-} // util
+} // mr
 
 #endif // MR_TIMER_H
