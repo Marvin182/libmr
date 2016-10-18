@@ -1,4 +1,4 @@
-#include "version.h"
+	#include "version.h"
 
 #include <iostream>
 #include <QRegExp>
@@ -14,7 +14,7 @@ const Version& Version::lib() {
 
 Version::Version(cqstring gitVersion) {
 	assert_error(!gitVersion.isEmpty());
-	QRegExp rx("v?(\\d+)\\.(\\d+)\\.?(\\d*).(\\d+)\\.?(\\w*)\\.(\\d+)\\.(\\w+)");
+	QRegExp rx("^v?(\\d+)\\.(\\d+)\\.?(\\d*).(\\d+)-?(a\\d|b\\d|rc\\d|alpha\\d|beta\\d)?-\\d+-(\\w+)");
 	rx.indexIn(gitVersion);
 
 	assert_error(rx.pos() == 0, "version regexp did not match correctly (pos: %d)", rx.pos());
@@ -27,15 +27,19 @@ Version::Version(cqstring gitVersion) {
 	revision = rx.cap(3).toInt(&ok);
 	if (!ok) revision = 0;
 	build = rx.cap(4).toInt(&ok);
-	assert_error(ok, "could not parse build");
+	assert_error(ok, "could not parse build number");
 
 	status = rx.cap(5);
-	commitId = rx.cap(7);
+	// assert_error(status.length() == 1, "invalid status '%s'", cstr(status));
+	// if (status[0] == 'r') status = "c";
+	// status += rx.cap(6);
+	commitId = rx.cap(6);
 
 	assert_error(major >= 0);
 	assert_error(minor >= 0);
 	assert_error(revision >= 0);
 	assert_error(build >= 0);
+	assert_error(commitId.length() >= 6, "invalid commit id '%s'", cstr(commitId));
 }
 
 bool Version::isStable() const {

@@ -1,6 +1,5 @@
 .DS_Store
+build/
 tmp/
-debug/
-release/
 mr.pro.user
 *.sublime-workspace

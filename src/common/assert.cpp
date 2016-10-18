@@ -1,6 +1,6 @@
 #include "assert.h"
-#include <iostream>
 
+#include <iostream>
 #include <QtDebug>
 #include <QFile>
 #include <QApplicationStateChangeEvent>

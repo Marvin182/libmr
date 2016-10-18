@@ -1,11 +1,11 @@
 #ifndef MR_VERSION_H
 #define MR_VERSION_H
 
-#include <QString>
-#include "assert.h"
+#include "../common/assert.h"
 #include "qt-string.h"
 
 namespace mr {
+namespace util {
 
 struct Version {
 	int major;
@@ -35,6 +35,7 @@ inline const Version& Version::app() {
 	return *v;
 }
 
+} //namespace util
 } // namespace mr
 
 #endif // MR_VERSION_H

@@ -16,7 +16,7 @@ win32 {
 }
  
 # Need to call git with manually specified paths to repository
-BASE_GIT_COMMAND = git --git-dir $$PWD/.git --work-tree $$PWD
+BASE_GIT_COMMAND = git --git-dir $$GIT_DIR/.git --work-tree $$GIT_DIR
 
 # Trying to get version from git tag / revision
 GIT_DESCRIBE = $$system($$BASE_GIT_COMMAND describe --long --always --tags 2> $$NULL_DEVICE)
@@ -43,7 +43,6 @@ RIGHT ~= s/v?\d+\.\d+\.?\d*//
 GIT_VERSION = $$LEFT-$$GIT_BUILD_NUMBER$$RIGHT
 
 # Turns describe output like v0.1.5-42-g652c397 into "0.1.5.42.652c397"
-GIT_VERSION ~= s/-/"."
 GIT_VERSION ~= s/g/""
 GIT_VERSION ~= s/v/""
 
@@ -52,8 +51,7 @@ GIT_VERSION ~= s/v/""
 DEFINES += GIT_VERSION=\\\"$$GIT_VERSION\\\"
 
 # Now we are ready to pass parsed version to Qt
-VERSION = $$LEFT-$$GIT_BUILD_NUMBER
-VERSION ~= s/-/"."
+VERSION = $$LEFT.$$GIT_BUILD_NUMBER
 VERSION ~= s/v/""
 
 # By default Qt only uses major and minor version for Info.plist on Mac.

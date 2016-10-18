@@ -1,0 +1,8 @@
+#ifndef MR_ALGO_H
+#define MR_ALGO_H
+
+#include "../../src/algo/BoolFlags.h"
+#include "../../src/algo/Heap.h"
+#include "../../src/algo/IdSet.h"
+
+#endif // MR_ALGO_H

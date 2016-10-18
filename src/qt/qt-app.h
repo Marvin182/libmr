@@ -4,7 +4,7 @@
 #include <QString>
 #include <QStringList>
 #include <QMap>
-#include "assert.h"
+#include "../common/assert.h"
 #include "qt-string.h"
 
 namespace mr {
@@ -12,7 +12,7 @@ namespace qt {
 
 QString appLocalDataLocation();
 
-// very simple serlization as the Qt serlization to non-ASCII
+// very simple serialization as the Qt serialization to non-ASCII
 template <typename K, typename L>
 QString serialize(const QMap<K, L>& m);
 

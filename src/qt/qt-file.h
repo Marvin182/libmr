@@ -33,9 +33,15 @@ inline void readTextFile(cqstring filename, F func) {
 	auto data = file.readAll();
 	assert_error(file.atEnd(), "not all data read from file '%s'", cstr(filename));
 
-	QTextStream in(data);
-	in.setCodec(QTextCodec::codecForUtfText(data));
+	QTextCodec::ConverterState state;
+	QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+	const QString text = codec->toUnicode(data.constData(), std::min(10000, data.size()), &state);
+	if (state.invalidChars > 0) {
+		codec = QTextCodec::codecForUtfText(data);
+	}
 
+	QTextStream in(data);
+	in.setCodec(codec);
 	func(in);
 
 	assert_warning(in.atEnd(), "did not read whole file '%s'", cstr(filename));

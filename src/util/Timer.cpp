@@ -1,7 +1,8 @@
 #include "Timer.h"
-#include "assert.h"
+#include "../common/assert.h"
 
 namespace mr {
+namespace util {
 
 Timer::Timer(TimerState state) :
 	state(state),
@@ -99,4 +100,5 @@ Timer::clock_t::time_point Timer::now() const {
 	return clock_t::now();
 }
 
+} // namespace util
 } // namespace mr

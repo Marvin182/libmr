@@ -1,5 +1,5 @@
 #include "qt-string.h"
-#include "assert.h"
+#include "../common/assert.h"
 #include <QLocale>
 #include <iostream>
 

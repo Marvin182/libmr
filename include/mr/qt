@@ -1,0 +1,9 @@
+#ifndef MR_QT_H
+#define MR_QT_H
+
+#include "../../src/qt-log.h"
+#include "../../src/qt-app.h"
+#include "../../src/qt-file.h"
+#include "../../src/qt-string.h"
+
+#endif // MR_QT_H
