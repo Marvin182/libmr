@@ -1,6 +1,6 @@
 # libmr
 
-This is my personal C++ library. It's not more than a bunch of more or less useful C++ methods - so far very low level stuff. In future I might add data structures and algorithms.
+This is my personal C++ library. It's not more than a bunch of more or less useful C++ classes and methods - so far very low level stuff. In future I might add data structures and algorithms.
 
 ## Build
 ```
@@ -18,18 +18,17 @@ Options:
 
 
 ## Usage
-TODO
-(build, add include directory to project and link to the created binary files)
+TODO: Describe usage (build, add include directory to project and link to the created binary files)
 
 ## Headers
-- mr/algo - A few helper classes for specific cases in algorithmic problems
-- mr/common - better asserts, constants, wrapped methods for std random header
-- mr/qt - some Qt helper methods
-- mr/timer - Timer class
-- mr/version - Version class (also see gitversion.pri)
+- <mr/algo> - A few helper classes for specific cases in algorithmic problems
+- <mr/common> - better asserts, constants, wrapped methods for std random header
+- <mr/qt> - some Qt helper methods
+- <mr/timer> - Timer class
+- <mr/version> - Version class (also see gitversion.pri)
 
 ## License
-For know I will stick with the MIT License, but when I have time I will choose or switch to an similar license with a "non-military use only" clause. This code should not be used for any kind of violence.
+For know this code will be under the MIT License, but when I have time I will switch to an similar license with a "non-military use only" clause. This code should not be used for any kind of violence.
 
 The MIT License (MIT)
 
