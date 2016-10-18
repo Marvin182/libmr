@@ -1,27 +1,34 @@
-Hi there,
+# libmr
 
-this is my personal C++ library. It's not more than a bunch of more or less useful C++ methods - so far very low level stuff. In future I might add data structures and algorithms.
+This is my personal C++ library. It's not more than a bunch of more or less useful C++ methods - so far very low level stuff. In future I might add data structures and algorithms.
 
-Build
------
-TODO
-(it should be as simple as loading the Qt project)
+## Build
+```
+mkdir build
+cd build
+cmake .. <OPTIONS>
+make
+```
 
-Usage
------
+Options:
+
+- `-DBUILD_WITH_QT=OFF` Don't build parts based on Qt5
+- `-DCMAKE_PREFIX_PATH=<PATH>` Point CMake to Qt5 directory
+- `-DCMAKE_BUILD_TYPE=Debug` Build with debug flags
+
+
+## Usage
 TODO
 (build, add include directory to project and link to the created binary files)
 
-Headers
--------
-TODO
-- mr/common - better asserts, wrapped methods for std random header
+## Headers
+- mr/algo - A few helper classes for specific cases in algorithmic problems
+- mr/common - better asserts, constants, wrapped methods for std random header
+- mr/qt - some Qt helper methods
 - mr/timer - Timer class
-- mr/Version - Version class (also see gitversion.pri)
+- mr/version - Version class (also see gitversion.pri)
 
-License
--------
-
+## License
 For know I will stick with the MIT License, but when I have time I will choose or switch to an similar license with a "non-military use only" clause. This code should not be used for any kind of violence.
 
 The MIT License (MIT)
