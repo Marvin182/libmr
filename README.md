@@ -25,7 +25,6 @@ TODO: Describe usage (build, add include directory to project and link to the cr
 - *mr/common* - better asserts, constants, wrapped methods for std random header
 - *mr/qt* - some Qt helper methods
 - *mr/timer* - Timer class
-- *mr/version* - Version class (also see gitversion.pri)
 
 ## License
 For know this code will be under the MIT License, but when I have time I will switch to an similar license with a "non-military use only" clause. This code should not be used for any kind of violence.
