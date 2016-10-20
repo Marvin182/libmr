@@ -1,10 +1,10 @@
-#include "qt-log.h"
+#include "log.h"
 
 #include <iostream>
 #include <QFile>
 #include <QDateTime>
-#include "qt-string.h"
-#include "../common/assert.h"
+#include "assert.h"
+#include "../qt/qt-string.h"
 
 namespace mr {
 namespace log {

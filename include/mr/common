@@ -4,6 +4,7 @@
 #include "../../src/common/assert.h"
 #include "../../src/common/codejam.h"
 #include "../../src/common/constants.h"
+#include "../../src/common/log.h"
 #include "../../src/common/random.h"
 #include "../../src/common/vector.h"
 

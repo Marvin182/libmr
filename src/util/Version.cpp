@@ -5,6 +5,7 @@
 #include <QStringList>
 
 namespace mr {
+namespace util {
 
 const Version& Version::lib() {
 	static Version* v = new Version(LIB_VERSION);
@@ -30,9 +31,6 @@ Version::Version(cqstring gitVersion) {
 	assert_error(ok, "could not parse build number");
 
 	status = rx.cap(5);
-	// assert_error(status.length() == 1, "invalid status '%s'", cstr(status));
-	// if (status[0] == 'r') status = "c";
-	// status += rx.cap(6);
 	commitId = rx.cap(6);
 
 	assert_error(major >= 0);
@@ -57,4 +55,5 @@ QString Version::longStr() const {
 	return shortStr() + QString(" (commit id: %1, build: %2)").arg(commitId).arg(build);
 }
 
+} // namespace util
 } // namespace mr

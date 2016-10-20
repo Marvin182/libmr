@@ -22,7 +22,6 @@ include(RequireOutOfSourceBuild)
 ###
 option(BUILD_WITH_QT "Build parts depending on Qt" ON)
 
-
 ###
 ### Build
 ###
@@ -35,6 +34,10 @@ endif()
 # Set Git version defines
 include(AddGitVersion)
 
+# put binaries in bin/ and lib/ subfolders instead of CMAKE_BINARY_DIR root
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
 ###
 ### Sources
 ###
@@ -45,7 +48,7 @@ set(src_all ${src_all} ${src_common} ${src_util})
 
 if (BUILD_WITH_QT)
 	file(GLOB src_qt src/qt/*.cpp)
-	set(GLOB src_qt ${src_qt} src/common/assert.cpp src/util/Version.cpp)
+	set(src_qt ${src_qt} src/common/assert.cpp src/common/log.cpp src/util/Version.cpp)
 	set(src_all ${src_all} ${src_qt})
 endif()
 
@@ -53,7 +56,8 @@ endif()
 ### Targets
 ###
 add_library(libmr SHARED ${src_all})
-set_property(TARGET libmr PROPERTY CXX_STANDARD 14)
+set_target_properties(libmr PROPERTIES OUTPUT_NAME mr CXX_STANDARD 14)
+add_git_version(libmr)
 
 if (BUILD_WITH_QT)
 	# Add Homebrew default install directory for qt5 formula

@@ -2,7 +2,7 @@
 #define MR_VERSION_H
 
 #include "../common/assert.h"
-#include "qt-string.h"
+#include "../qt/qt-string.h"
 
 namespace mr {
 namespace util {
@@ -25,7 +25,6 @@ struct Version {
 	QString longStr() const;
 
 private:
-
 	QString rev() const { return revision > 0 ? QString(".%1").arg(revision) : ""; }
 };
 
