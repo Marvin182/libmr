@@ -56,20 +56,20 @@ add_library(libmr SHARED ${src_all})
 set_target_properties(libmr PROPERTIES OUTPUT_NAME mr CXX_STANDARD 14)
 
 if (BUILD_WITH_QT)
-	# Add Homebrew default install directory for qt5 formula
-	# set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /usr/local/Cellar/qt5/5.7.0)
+	# Qt5 documentation on using CMake: http://doc.qt.io/qt-5/cmake-manual.html
 
-	# Find includes in corresponding build directories
-	set(CMAKE_INCLUDE_CURRENT_DIR ON)
+	# Add Homebrew default install directory for qt5 formula
+	set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /usr/local/Cellar/qt5/5.7.0)
 
 	# Instruct CMake to run moc automatically when needed.
-	set(CMAKE_AUTOMOC ON)
-	find_package(Qt5Widgets)
-	target_link_libraries(libmr Qt5::Widgets)
+	find_package(Qt5Core)
+	find_package(Qt5Gui)
+	target_link_libraries(libmr Qt5::Core)
+	target_link_libraries(libmr Qt5::Gui)
 
 	target_compile_definitions(libmr INTERFACE -DBUILD_WITH_QT)
 endif()
 
 # Configure version.cpp to contain version information based on the repository history
-add_custom_target(version_cpp ALL COMMAND ${CMAKE_COMMAND} -DSOURCE_DIR=${PROJECT_SOURCE_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ConfigureVersionCppFromGit.cmake)
-add_dependencies(libmr version_cpp)
+add_custom_target(libmr_version_cpp ALL COMMAND ${CMAKE_COMMAND} -DSOURCE_DIR=${PROJECT_SOURCE_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ConfigureVersionCppFromGit.cmake)
+add_dependencies(libmr libmr_version_cpp)
