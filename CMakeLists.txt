@@ -57,7 +57,7 @@ set_target_properties(libmr PROPERTIES OUTPUT_NAME mr CXX_STANDARD 14)
 
 if (BUILD_WITH_QT)
 	# Add Homebrew default install directory for qt5 formula
-	set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /usr/local/Cellar/qt5/5.7.0)
+	# set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /usr/local/Cellar/qt5/5.7.0)
 
 	# Find includes in corresponding build directories
 	set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -66,6 +66,8 @@ if (BUILD_WITH_QT)
 	set(CMAKE_AUTOMOC ON)
 	find_package(Qt5Widgets)
 	target_link_libraries(libmr Qt5::Widgets)
+
+	target_compile_definitions(libmr INTERFACE -DBUILD_WITH_QT)
 endif()
 
 # Configure version.cpp to contain version information based on the repository history
