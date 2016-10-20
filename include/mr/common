@@ -1,6 +1,7 @@
 #ifndef MR_COMMON_H
 #define MR_COMMON_H
 
+#include "../../src/version.h"
 #include "../../src/common/assert.h"
 #include "../../src/common/codejam.h"
 #include "../../src/common/constants.h"

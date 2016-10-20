@@ -31,9 +31,6 @@ if (NOT CMAKE_BUILD_TYPE)
 	message(STATUS "No build type selected, default to Release. You can choose debug build by appending -DCMAKE_BUILD_TYPE=Debug to the cmake command.")
 endif()
 
-# Set Git version defines
-include(AddGitVersion)
-
 # put binaries in bin/ and lib/ subfolders instead of CMAKE_BINARY_DIR root
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -44,11 +41,11 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 file(GLOB src_algo src/algo/*.cpp)
 set(src_common src/common/pempek_assert.cpp src/common/random.cpp)
 set(src_util src/util/Timer.cpp)
-set(src_all ${src_all} ${src_common} ${src_util})
+set(src_all ${src_all} ${src_common} ${src_util} src/version.cpp)
 
 if (BUILD_WITH_QT)
 	file(GLOB src_qt src/qt/*.cpp)
-	set(src_qt ${src_qt} src/common/assert.cpp src/common/log.cpp src/util/Version.cpp)
+	set(src_qt ${src_qt} src/common/assert.cpp src/common/log.cpp)
 	set(src_all ${src_all} ${src_qt})
 endif()
 
@@ -57,7 +54,6 @@ endif()
 ###
 add_library(libmr SHARED ${src_all})
 set_target_properties(libmr PROPERTIES OUTPUT_NAME mr CXX_STANDARD 14)
-add_git_version(libmr)
 
 if (BUILD_WITH_QT)
 	# Add Homebrew default install directory for qt5 formula
@@ -71,3 +67,7 @@ if (BUILD_WITH_QT)
 	find_package(Qt5Widgets)
 	target_link_libraries(libmr Qt5::Widgets)
 endif()
+
+# Configure version.cpp to contain version information based on the repository history
+add_custom_target(version_cpp ALL COMMAND ${CMAKE_COMMAND} -DSOURCE_DIR=${PROJECT_SOURCE_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ConfigureVersionCppFromGit.cmake)
+add_dependencies(libmr version_cpp)
