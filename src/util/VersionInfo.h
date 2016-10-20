@@ -16,7 +16,7 @@ struct VersionInfo {
 	const_string commit;
 	const_string branch;
 
-	constexpr Version(int major, int minor, int revision, int build, const_string commit, const_string branch, const_string stage_name, int stage_number):
+	constexpr VersionInfo(int major, int minor, int revision, int build, const_string commit, const_string branch, const_string stage_name, int stage_number):
 		major(major),
 		minor(minor),
 		revision(revision),
@@ -75,4 +75,4 @@ private:
 } // namespace mr
 
 
-#endif // MR_VERSION_H
+#endif // MR_VERSION_INFO_H
