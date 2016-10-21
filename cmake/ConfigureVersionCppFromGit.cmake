@@ -4,10 +4,7 @@ set(version_cpp ${SOURCE_DIR}/src/version.cpp)
 set(version_cpp_in ${SOURCE_DIR}/src/version.cpp.in)
 set(version_cpp_tmp ${CMAKE_CURRENT_BINARY_DIR}/version.cpp.tmp)
 
-find_package(Git)
-if (NOT GIT_FOUND)
-	message(SEND_ERROR "Git not found, building without Git version info!")
-endif()
+find_package(Git REQUIRED)
 
 # default values
 set(git_version_major 0)

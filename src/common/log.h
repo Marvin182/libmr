@@ -1,7 +1,7 @@
 #ifndef MR_LOG_H
 #define MR_LOG_H
 
-#ifdef BUILD_WITH_QT
+#ifdef QT_CORE_LIB
 
 #include <QtDebug>
 
@@ -18,6 +18,6 @@ void setLogfile(QtMsgType type, const char* filename);
 } // namespace log
 } // namespace mr
 
-#endif // BUILD_WITH_QT
+#endif // QT_CORE_LIB
 
 #endif // MR_LOG_H

@@ -41,10 +41,10 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 file(GLOB src_algo src/algo/*.cpp)
 set(src_common src/common/pempek_assert.cpp src/common/random.cpp)
 set(src_util src/util/Timer.cpp)
-set(src_all ${src_all} ${src_common} ${src_util} src/version.cpp)
+set(src_all ${src_common} ${src_util} src/version.cpp)
 
 if (BUILD_WITH_QT)
-	file(GLOB src_qt src/qt/*.cpp)
+	file(GLOB src_qt src/qt/*.cpp src/qt/*.h)
 	set(src_qt ${src_qt} src/common/assert.cpp src/common/log.cpp)
 	set(src_all ${src_all} ${src_qt})
 endif()
@@ -61,13 +61,14 @@ if (BUILD_WITH_QT)
 	# Add Homebrew default install directory for qt5 formula
 	set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} /usr/local/Cellar/qt5/5.7.0)
 
+	# Instruct CMake to run moc automatically for sources.
+	set(CMAKE_AUTOMOC ON)
+
 	# Instruct CMake to run moc automatically when needed.
-	find_package(Qt5Core)
-	find_package(Qt5Gui)
+	find_package(Qt5Core 5.7.0 REQUIRED)
+	find_package(Qt5Gui 5.7.0 REQUIRED)
 	target_link_libraries(libmr Qt5::Core)
 	target_link_libraries(libmr Qt5::Gui)
-
-	target_compile_definitions(libmr INTERFACE -DBUILD_WITH_QT)
 endif()
 
 # Configure version.cpp to contain version information based on the repository history

@@ -22,7 +22,7 @@ using namespace pempek::assert::implementation;
 
 #define assert_unreachable(...)	PPK_ASSERT_FATAL(false, "Reached unexpected code path.")
 
-#ifdef BUILD_WITH_QT
+#ifdef QT_CORE_LIB
 
 namespace mr {
 namespace assert {
@@ -36,6 +36,6 @@ void removeAllAsserdHandlers();
 } // namespace assert
 } // namespace mr
 
-#endif // BUILD_WITH_QT
+#endif // QT_CORE_LIB
 
 #endif // MR_ASSERT_H
